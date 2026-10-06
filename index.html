@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantikku Ulang Tahun</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Estetik Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Library Canvas Confetti / Kembang Api -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" src="assets/audio/lagu.mp3" loop></audio>
+
+    <!-- Overlay Pemutar Musik Pertama Kali (HALAMAN DEPAN) -->
+    <div id="music-gate" class="gate-overlay">
+        <div class="gate-card">
+            <div class="hourglass-icon">⏳</div>
+            <h2>A Little Surprise For You</h2>
+            <p>Pakai earphone nya sayang, lalu putar alunan lagu ini untuk membuka kejutan di dalamnya</p>
+            
+            <!-- COUNTDOWN DIPINDAHKAN KE SINI (HALAMAN PERTAMA SEBELUM BUKA KAPSUL) -->
+            <div class="timer-box" style="margin: 15px 0;">
+                <div id="timer-text" class="timer-display">Menghitung waktu...</div>
+            </div>
+
+            <button id="open-gate-btn" class="btn-gold">✨ Click Disini Sayang</button>
+        </div>
+    </div>
+
+    <!-- Konten Utama (HALAMAN DALAM) -->
+    <main id="main-container" class="container blur-screen">
+        
+        <!-- Pemutar Musik Mini Floating -->
+        <div class="music-floating">
+            <span class="disc-icon" id="disc">💿</span>
+            <div class="music-text">
+                <span class="song-title">Waltz Akhir Zaman</span>
+                <span class="song-sub" id="music-status">Memutar...</span>
+            </div>
+            <button id="music-toggle" class="btn-play">⏸️</button>
+        </div>
+
+        <!-- Header Utama -->
+        <header class="header-section">
+            <div class="badge-tag"> Rabu 7 OKTOBER 2026</div>
+            <h1 class="main-title">Happy Birthday, Sayangg ❤</h1>
+            <p class="subtitle">Waktu berlalu, tapi rasa ini tetap utuh.</p>
+        </header>
+
+        <!-- Surat Utama dengan Efek Pengetikan -->
+        <section class="letter-container">
+            <div class="letter-paper">
+                <div class="paper-header">
+                    <span class="stamp">✉️ SPECIAL LETTER</span>
+                    <span class="date">7 Oktober 2026, 00:00 WIB</span>
+                </div>
+                <div class="typewriter-text" id="typewriter"></div>
+            </div>
+        </section>
+
+        <!-- Amplop "Open When..." (6 Amplop) -->
+        <section class="envelopes-section">
+            <h2 class="section-title">Amplop Waktu 💌</h2>
+            <p class="section-desc">Buka amplop ini sesuai dengan apa yang sedang kamu rasakan nanti ya Sayangku, Cintaku, Cantikku:</p>
+
+            <div class="envelopes-grid">
+                <div class="envelope-card" onclick="openModal(1)">
+                    <div class="env-icon">🌸</div>
+                    <h3>Buka saat kamu butuh semangat...</h3>
+                    <p>Klik untuk membuka pesan ➔</p>
+                </div>
+                <div class="envelope-card" onclick="openModal(2)">
+                    <div class="env-icon">🌙</div>
+                    <h3>Buka saat kamu merindukanku...</h3>
+                    <p>Klik untuk membuka pesan ➔</p>
+                </div>
+                <div class="envelope-card" onclick="openModal(3)">
+                    <div class="env-icon">🌧️</div>
+                    <h3>Buka saat kamu merasa lelah...</h3>
+                    <p>Klik membuka pesan ➔</p>
+                </div>
+                <div class="envelope-card" onclick="openModal(4)">
+                    <div class="env-icon">🧸</div>
+                    <h3>Buka saat kamu lagi manja / butuh pelukan...</h3>
+                    <p>Klik untuk membuka pesan ➔</p>
+                </div>
+                <div class="envelope-card" onclick="openModal(5)">
+                    <div class="env-icon">✨</div>
+                    <h3>Buka saat kamu ingin melihat masa depan...</h3>
+                    <p>Klik untuk membuka pesan ➔</p>
+                </div>
+                <div class="envelope-card" onclick="openModal(6)">
+                    <div class="env-icon">🥺</div>
+                    <h3>Buka saat kamu lagi bad mood / sedih...</h3>
+                    <p>Klik untuk membuka pesan ➔</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION ZONA MINI GAME KENANGAN -->
+        <section class="game-section">
+            <h2 class="section-title">Main Game Yuk Sayang</h2>
+            <p class="section-desc">Yuk, selesaikan game kecil ini untuk membuka lembaran kenangan kita satu per satu sayang</p>
+
+            <div class="game-menu-grid">
+                <div class="game-card" onclick="selectGame(1)">
+                    <div class="game-badge">Game 1</div>
+                    <div class="game-icon">🎴</div>
+                    <h3>Tebak Foto</h3>
+                    <p>Cocokkin kartu foto kita yang sama ya Sayang</p>
+                    <span class="play-btn">Click Ini Cintaku ➔</span>
+                </div>
+
+                <div class="game-card" onclick="selectGame(2)">
+                    <div class="game-badge">Game 2</div>
+                    <div class="game-icon">🧩</div>
+                    <h3>Susun Puzzle Foto</h3>
+                    <p>Coba susun puzzle ini sayang, Sayangacu pasti bisa</p>
+                    <span class="play-btn">Tekan Disini Cantikku ➔</span>
+                </div>
+
+                <div class="game-card" onclick="selectGame(3)">
+                    <div class="game-badge">Game 3</div>
+                    <div class="game-icon">🎁</div>
+                    <h3>Gosok Foto ini Sayang</h3>
+                    <p>Usap untuk lihat foto kita Sayangku</p>
+                    <span class="play-btn">Ketuk tombol ini Sayang ➔</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Berbahagia di hari specialmu ini ya kecintaanku kesayanganku ❤</p>
+        </footer>
+    </main>
+
+    <!-- MODAL POPUP SURAT AMPLOP -->
+    <div id="letter-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body" class="modal-body-text"></div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP GAME 1 -->
+    <div id="game-modal-1" class="modal">
+        <div class="modal-content game-modal-content">
+            <span class="close-btn" onclick="closeGame(1)">&times;</span>
+            <div class="arena-header">
+                <h3>🎴 Tebak Foto</h3>
+            </div>
+            <p class="game-instruction">Temukan kartu foto kita yang sama Sayang</p>
+            <div class="memory-board" id="memory-board"></div>
+            <div id="game-win-msg-1" class="win-message hidden">
+                🎉 Yeayyy Sayangku berhasil !
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP GAME 2 -->
+    <div id="game-modal-2" class="modal">
+        <div class="modal-content game-modal-content">
+            <span class="close-btn" onclick="closeGame(2)">&times;</span>
+            <div id="g2-level-select" class="level-select-container">
+                <h3>🧩 Pilih Level Puzzle Foto</h3>
+                <p class="game-instruction">Selesaikan level secara berurutan untuk membuka foto berikutnya ya Sayang</p>
+                <div class="level-buttons-grid">
+                    <button id="g2-btn-lvl1" class="btn-level unlocked" onclick="startPuzzleLevel(1)">
+                        <span class="lvl-title">Level 1</span>
+                        <span class="lvl-status">🔓 Terbuka</span>
+                    </button>
+                    <button id="g2-btn-lvl2" class="btn-level locked" disabled onclick="startPuzzleLevel(2)">
+                        <span class="lvl-title">Level 2</span>
+                        <span class="lvl-status">🔒 Terkunci</span>
+                    </button>
+                    <button id="g2-btn-lvl3" class="btn-level locked" disabled onclick="startPuzzleLevel(3)">
+                        <span class="lvl-title">Level 3</span>
+                        <span class="lvl-status">🔒 Terkunci</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="g2-arena" class="game-arena-wrapper hidden">
+                <button class="btn-back-level" onclick="showG2LevelSelect()">⬅️ Pilih Level Lain</button>
+                <div class="arena-header">
+                    <h3 id="g2-current-level-title">🧩 Susun Puzzle Foto - Level 1</h3>
+                </div>
+                <p class="game-instruction">Ikuti petunjuk angka (1-8) di setiap kepingan foto ya Sayang!</p>
+                <div class="puzzle-board" id="puzzle-board"></div>
+                <div id="game-win-msg-2" class="win-message hidden">
+                    <div id="g2-win-text">🎉 Hore! Puzzle Level Ini Berhasil Tersusun Utuh! ❤</div>
+                    <button id="g2-next-lvl-btn" class="btn-next-level" onclick="nextPuzzleLevel()">Lanjut ke Level Berikutnya ➔</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP GAME 3 -->
+    <div id="game-modal-3" class="modal">
+        <div class="modal-content game-modal-content">
+            <span class="close-btn" onclick="closeGame(3)">&times;</span>
+            <div id="g3-level-select" class="level-select-container">
+                <h3>🎁 Pilih Level Gosok Foto</h3>
+                <p class="game-instruction">Gosok foto dari level 1 sampai 3 untuk mengungkap semua kenangan kita Sayang</p>
+                <div class="level-buttons-grid">
+                    <button id="g3-btn-lvl1" class="btn-level unlocked" onclick="startScratchLevel(1)">
+                        <span class="lvl-title">Level 1</span>
+                        <span class="lvl-status">🔓 Terbuka</span>
+                    </button>
+                    <button id="g3-btn-lvl2" class="btn-level locked" disabled onclick="startScratchLevel(2)">
+                        <span class="lvl-title">Level 2</span>
+                        <span class="lvl-status">🔒 Terkunci</span>
+                    </button>
+                    <button id="g3-btn-lvl3" class="btn-level locked" disabled onclick="startScratchLevel(3)">
+                        <span class="lvl-title">Level 3</span>
+                        <span class="lvl-status">🔒 Terkunci</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="g3-arena" class="game-arena-wrapper hidden">
+                <button class="btn-back-level" onclick="showG3LevelSelect()">⬅️ Pilih Level Lain</button>
+                <div class="arena-header">
+                    <h3 id="g3-current-level-title">🎁 Gosok Foto - Level 1</h3>
+                </div>
+                <p class="game-instruction">Usap permukaan bertuliskan 'GOSOK DI SINI' untuk melihat gambarnya ya Sayang ✨</p>
+                
+                <div class="scratch-wrapper">
+                    <img id="scratch-img" src="assets/foto/scratch1.jpg" alt="Foto Rahasia" class="scratch-bg-img">
+                    <canvas id="scratch-canvas" width="280" height="280"></canvas>
+                </div>
+
+                <div id="game-win-msg-3" class="win-message hidden">
+                    <div id="g3-win-text">💖 Surprise! Foto Rahasia Terungkap Sempurna!</div>
+                    <button id="g3-next-lvl-btn" class="btn-next-level" onclick="nextScratchLevel()">Lanjut ke Level Berikutnya ➔</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
